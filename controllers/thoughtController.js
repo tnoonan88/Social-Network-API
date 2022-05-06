@@ -86,7 +86,7 @@ const thoughtController = {
                 : res.json({ message: 'Reaction successfulled deleted!' })
         })
         .catch((err) => res.status(500).json(err))
-    }
+    },
 
 };
 
