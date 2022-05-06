@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models/index');
 
 const userController = {
-    getUsers(req, res) {
+    getAllUsers(req, res) {
         User.find()
             .populate({
                 path: 'thought',
@@ -32,7 +32,7 @@ const userController = {
             });
     },
     createUser(req, res) {
-        User.create(req, res)
+        User.create(req.body)
             .then((newUser) => res.json(newUser))
             .catch((err) => res.status(500).json(err));
     },
@@ -81,7 +81,7 @@ const userController = {
         .then(friendData => {
             !friendData
                 ? res.status(404).json({ message: 'No user found with that ID!' })
-                : res.json({ message: 'Friend successfully added!' })
+                : res.json({ message: 'Friend successfully deleted!' })
         })
         .catch((err) => res.status(500).json(err))
     },
