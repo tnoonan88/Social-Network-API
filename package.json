@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/tnoonan88/Social-Network-API/issues"
   },
-  "homepage": "https://github.com/tnoonan88/Social-Network-API#readme"
+  "homepage": "https://github.com/tnoonan88/Social-Network-API#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "moment": "^2.29.3",
+    "mongoose": "^6.3.2",
+    "nodemon": "^2.0.16"
+  }
 }
