@@ -4,7 +4,7 @@ const userController = {
     getAllUsers(req, res) {
         User.find()
             .populate({
-                path: 'thought',
+                path: 'thoughts',
                 select: '-__v'
             })
             .select('-__v')
