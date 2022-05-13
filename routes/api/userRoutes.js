@@ -17,10 +17,10 @@ router.route('/')
 router.route('/:userId')
     .get(getUserById)
     .delete(deleteUser)
-    .put(updateUser)
+    .put(updateUser);
 
 router.route('/:userId/friends/:friendId')
     .post(addFriend)
-    .delete(deleteFriend)
+    .delete(deleteFriend);
 
 module.exports = router;
