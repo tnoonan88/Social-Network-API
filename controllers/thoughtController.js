@@ -4,10 +4,10 @@ const userController = require('./userController');
 const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find()
-               .populate({
-                   path: 'user',
-                   select: '-__v'
-                })
+            //    .populate({
+            //        path: 'User',
+            //        select: '-__v'
+            //     })
                 .select('-__v')
                 .then(thoughtsAll => res.json(thoughtsAll))
                 .catch((err) => {
@@ -17,10 +17,10 @@ const thoughtController = {
     },
     getThoughtById(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
-               .populate({
-                   path: 'user',
-                   select: '-__v'
-        })
+        //        .populate({
+        //            path: 'User',
+        //            select: '-__v'
+        // })
         .select('-__v')
         .then(thoughtById => res.json(thoughtById))
         .catch((err) => {
@@ -30,13 +30,21 @@ const thoughtController = {
     },
     createThought(req, res) {
         Thought.create(req.body)
-               .then(({_id}) => {
-                User.findOneAndUpdate(
-                    { username: body.username },
-                    { $addToSet: { thoughts: _id } },
+               .then((thoughtData) => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $push: { thoughts: thoughtData._id } },
                     { new: true }
             )
         })
+        .then((thoughtData) => {
+            if (!thoughtData) {
+              return res.status(404).json({ message: 'Thought created but no user with this id!' });
+            }
+    
+            res.json({ message: 'Thought successfully created!' });
+          })
+    
         .catch((err) => res.status(500).json(err));
     },
     updateThought(req, res) {
