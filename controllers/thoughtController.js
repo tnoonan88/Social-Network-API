@@ -4,10 +4,6 @@ const userController = require('./userController');
 const thoughtController = {
     getAllThoughts(req, res) {
         Thought.find()
-            //    .populate({
-            //        path: 'User',
-            //        select: '-__v'
-            //     })
                 .select('-__v')
                 .then(thoughtsAll => res.json(thoughtsAll))
                 .catch((err) => {
@@ -17,10 +13,6 @@ const thoughtController = {
     },
     getThoughtById(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
-        //        .populate({
-        //            path: 'User',
-        //            select: '-__v'
-        // })
         .select('-__v')
         .then(thoughtById => res.json(thoughtById))
         .catch((err) => {
